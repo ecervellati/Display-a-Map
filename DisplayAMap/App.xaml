@@ -1,0 +1,16 @@
+﻿<Application x:Class="DisplayAMap.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewmodels="clr-namespace:DisplayAMap.WPF.ViewModel"
+             xmlns:local="clr-namespace:DisplayAMap.WPF">
+    
+    <Application.Resources>
+        
+        <ResourceDictionary>
+           
+   
+            
+        </ResourceDictionary>
+            
+    </Application.Resources>
+</Application>

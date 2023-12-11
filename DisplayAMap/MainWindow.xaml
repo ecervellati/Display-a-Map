@@ -1,0 +1,70 @@
+﻿<Window x:Class="DisplayAMap.WPF.MainWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DisplayAMap.WPF"
+      xmlns:utilities="clr-namespace:DisplayAMap.WPF.Utilities"
+      xmlns:viewModels="clr-namespace:DisplayAMap.WPF.ViewModel"
+      xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Geo App">
+
+    <Window.Resources>
+        <utilities:StringToBitmapImageConverter x:Key="StringToBitmapImageConverter"/>
+        <viewModels:MapViewModel x:Key="MapViewModel" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="312"/>
+            <!-- Left part -->
+            <ColumnDefinition Width="*"/>
+            <!-- Right part -->
+        </Grid.ColumnDefinitions>
+
+        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="23"/>
+        
+        <Button Content="Search" Margin="245,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0"
+        Command="{Binding ButtonCommand}" Height="23" Width="65"/>
+
+        <ListBox ItemsSource="{Binding ImageUrls}" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" Margin="0,23,0,0" Width="auto" Grid.RowSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Grid x:Name="ListBoxGrid">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseEnter">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.MouseEnterCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding ElementName=ListBoxGrid}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseLeave">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.MouseLeaveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding ElementName=ListBoxGrid}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                            <Image Width="100" Height="100" Source="{Binding Url, Converter={StaticResource StringToBitmapImageConverter}}" Margin="0,0,0,5"/>
+                            <Button Content="Select Image" Command="{Binding DataContext.SelectImageCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" Visibility="Collapsed"/>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <esri:MapView x:Name="MainMapView"
+                          Map="{Binding Map, Source={StaticResource MapViewModel}}"
+                          GraphicsOverlays="{Binding GraphicsOverlays, Source={StaticResource MapViewModel}}" Grid.Column="1" Height="auto" Grid.RowSpan="2"                     
+                          />
+
+
+    </Grid>
+</Window>
