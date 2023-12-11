@@ -10,7 +10,7 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Geo App">
+      Title="Display a Map App">
 
     <Window.Resources>
         <utilities:StringToBitmapImageConverter x:Key="StringToBitmapImageConverter"/>
@@ -36,7 +36,7 @@
                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Height="23"/>
         
         <Button Content="Search" Margin="245,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0"
-        Command="{Binding ButtonCommand}" Height="23" Width="65"/>
+        Command="{Binding ButtonCommand}" Height="23" Width="67"/>
 
         <ListBox ItemsSource="{Binding ImageUrls}" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" Margin="0,23,0,0" Width="auto" Grid.RowSpan="2">
             <ListBox.ItemTemplate>
@@ -60,11 +60,8 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <esri:MapView x:Name="MainMapView"
-                          Map="{Binding Map, Source={StaticResource MapViewModel}}"
-                          GraphicsOverlays="{Binding GraphicsOverlays, Source={StaticResource MapViewModel}}" Grid.Column="1" Height="auto" Grid.RowSpan="2"                     
-                          />
-
-
+        <esri:MapView x:Name="MainMapView" Grid.Column="1" Height="auto" Grid.RowSpan="2" Map="{Binding Map, Source={StaticResource MapViewModel}, UpdateSourceTrigger=PropertyChanged}"
+                        GraphicsOverlays="{Binding GraphicsOverlays, Source={StaticResource MapViewModel}, UpdateSourceTrigger=PropertyChanged}">
+        </esri:MapView>
     </Grid>
 </Window>
