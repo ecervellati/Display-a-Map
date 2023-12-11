@@ -2,16 +2,10 @@
 using DisplayAMap.WPF.ViewModel;
 using DisplayAMap.WPF;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using DisplayAMap.API;
-using DisplayAMap.API.Models;
-using System.IO;
 using System.Text;
 
 namespace DisplayAMap
@@ -31,6 +25,7 @@ namespace DisplayAMap
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);

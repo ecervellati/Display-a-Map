@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.UI;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Esri.ArcGISRuntime.Geometry;
 using DisplayAMap.API.Results;
 using System.Windows;
-using System.Windows.Media;
-using Esri.ArcGISRuntime.UI.Controls;
-using DisplayAMap.WPF;
-using DisplayAMap.WPF.Utilities;
+
 
 namespace DisplayAMap.WPF.ViewModel
 {
